@@ -1,0 +1,34 @@
+define('AUTH_KEY',         'kf12g4_o!l1)=yV@^m-r[|84C,FY+J[f5F`>:%A[g^Y#ESe5wqPpsvI=-N~b7L_(');
+define('SECURE_AUTH_KEY',  'T9;Osba8TYrn|Ch9w>EX]!ooniX+nl{R8|+uOF&R.MP9EZMD+p+4Sg-#pgmCS*;E');
+define('LOGGED_IN_KEY',    'j4v|U`_,/E+R|6jk{yzFxG#nww5kMKQKLp0.aHnh8P2E k/SfiKfHb&]vTISA!5#');
+define('NONCE_KEY',        'n}(P[.-23?T?7p2&>geVwk*xij9g,FL|ZK=&8>@h7[@?|uc+lkv>S]D$0xYf+VYi');
+define('AUTH_SALT',        ']M7FGH6G-`/^d_VssDyv(oCJtH,l&-Bdi3?xo_z`?HPR1*]9a:pS,P!|5- ;lp!c');
+define('SECURE_AUTH_SALT', '.qO </4w[((yb{3?o{Hk6]8QC]#GA]vm9ScyJIy~E+>:Z|mb+5!WGQYh.KFa:g`S');
+define('LOGGED_IN_SALT',   'aFU9<a2X`,R*Io2EalGo, MBH`K^U4N[wr8#|MRMhk$f*6c-@]43!Lb=.2)0 ]{a');
+define('NONCE_SALT',       '-FY/H,bP}]9}y|0indM!2r.O*]x- _r0]BoF{IijRw&:M{|3d/WN- Og7L(tmcQz');
+
+http {
+  include    conf/mime.types;
+  include    /etc/nginx/proxy.conf;
+  include    /etc/nginx/fastcgi.conf;
+  index    index.html index.htm index.php;
+ 
+  default_type application/octet-stream;
+  log_format   main '$remote_addr - $remote_user [$time_local]  $status '
+    '"$request" $body_bytes_sent "$http_referer" '
+    '"$http_user_agent" "$http_x_forwarded_for"';
+  access_log   logs/access.log  main;
+  sendfile     on;
+  tcp_nopush   on;
+  server_names_hash_bucket_size 128; # this seems to be required for some vhosts
+ 
+  server { # php/fastcgi
+    listen       80;
+    server_name  domain1.com www.domain1.com;
+    access_log   logs/domain1.access.log  main;
+    root         html;
+ 
+    location ~ \.php$ {
+      fastcgi_pass   127.0.0.1:1025;
+    }
+  }
