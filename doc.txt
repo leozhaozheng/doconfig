@@ -1,4 +1,8 @@
 http://nginx.org/en/docs/beginners_guide.html
 http://www.howtoforge.com/preventing_ssh_dictionary_attacks_with_denyhosts
 http://rogerdudler.github.io/git-guide/index.zh.html
+http://my.oschina.net/u/575122/blog/158848#OSC_h3_2
+http://blog.sina.com.cn/s/blog_be7ce9be0101a2dm.html
+http://amix.dk/blog/viewEntry/19030
+https://linuxtoy.org/archives/history-command-usage-examples.html
 
